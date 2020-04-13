@@ -23,12 +23,11 @@ public interface EventDAOI {
     @Delete
     void delete(Event event);
 
-    @Query("DELETE FROM event_table")
-    void deleteAllEvents();
-
+    // Consulta per obtenir totes les dades de la taula d'events
     @Query("SELECT * FROM event_table")
     LiveData<List<Event>> getAllEvents();
 
+    // Consulta per obtenir totes les dades de la taula d'events per a un id específic
     @Query("SELECT * FROM event_table WHERE userId == :userId")
     LiveData<List<Event>> getAllEvents(int userId);
 

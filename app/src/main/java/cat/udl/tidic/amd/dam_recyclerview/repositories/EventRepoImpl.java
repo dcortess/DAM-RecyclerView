@@ -2,10 +2,8 @@ package cat.udl.tidic.amd.dam_recyclerview.repositories;
 
 import android.app.Application;
 import android.os.AsyncTask;
-
 import androidx.lifecycle.LiveData;
 import java.util.List;
-
 import cat.udl.tidic.amd.dam_recyclerview.dao.EventDAOI;
 import cat.udl.tidic.amd.dam_recyclerview.database.EventDatabase;
 import cat.udl.tidic.amd.dam_recyclerview.models.Event;
@@ -22,12 +20,12 @@ public class EventRepoImpl implements EventRepoI {
         allEvents = eventDAO.getAllEvents();
     }
 
+    // Funcions principals
 
     @Override
     public void insert(Event event) {
         new InsertEventAsyncTask(eventDAO).execute(event);
     }
-
 
     @Override
     public void update(Event event) {
@@ -51,11 +49,7 @@ public class EventRepoImpl implements EventRepoI {
         return allEvents;
     }
 
-    @Override
-    public void deleteAll() {
-
-    }
-
+    // Eliminar event
     private static class DeleteEventAsyncTask extends AsyncTask<Event, Void, Void> {
 
         private EventDAOI eventDAO;
@@ -71,6 +65,7 @@ public class EventRepoImpl implements EventRepoI {
         }
     }
 
+    // Actualitzar event
     private static class UpdateEventAsyncTask extends AsyncTask<Event, Void, Void> {
         private EventDAOI eventDAO;
 
@@ -85,6 +80,7 @@ public class EventRepoImpl implements EventRepoI {
         }
     }
 
+    // Inserir event
     private static class InsertEventAsyncTask extends AsyncTask<Event, Void, Void> {
         private EventDAOI eventDAO;
 

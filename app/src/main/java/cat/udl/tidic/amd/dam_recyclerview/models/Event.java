@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
 @Entity(tableName = "event_table")
 public class Event {
 
+    // Propietats
     @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
     private int id;
@@ -26,6 +27,7 @@ public class Event {
     private float avaluation;
 
 
+    // Constructor
     public Event(int userId, String start, String end, String tittle, String description,
     float avaluation) {
         this.userId = userId;
@@ -36,10 +38,10 @@ public class Event {
         this.avaluation = avaluation;
     }
 
+    // Getters & setters
     public int getUserId() {
         return userId;
     }
-
 
     public int getId() {
         return id;
@@ -49,7 +51,6 @@ public class Event {
         return start;
     }
 
-
     public String getEnd() {
         return end;
     }
@@ -58,16 +59,13 @@ public class Event {
         this.id = id;
     }
 
-
     public String getTittle() {
         return tittle;
     }
 
-
     public String getDescription() {
         return description;
     }
-
 
     public float getAvaluation() {
         return avaluation;
@@ -78,21 +76,21 @@ public class Event {
     @Override
     public boolean equals(Object o) {
 
-        // If the object is compared with itself then return true
+        // Si es compara amb ell mateix retorna true
         if (o == this) {
             return true;
         }
 
-        /* Check if o is an instance of Complex or not
-          "null instanceof [type]" also returns false */
+        /* Comprova si és una instància de Complex o no
+          "null instanceof [type]" també retorna false */
         if (!(o instanceof Event)) {
             return false;
         }
 
-        // typecast o to Complex so that we can compare data members
+        // Per a que poguem comparar membres, copiem
         Event e = (Event) o;
 
-        // Compare the data members and return accordingly
+        // Compara els membres de la taula i retorna en conseqüència
         return this.id == e.getId()
                 && this.userId == e.getUserId()
                 && this.start.equals(e.getStart())

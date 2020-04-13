@@ -1,28 +1,25 @@
 package cat.udl.tidic.amd.dam_recyclerview;
 
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-
 import cat.udl.tidic.amd.dam_recyclerview.models.Event;
 
-
+// Cada vegada que creem/modifiquem un event, s'actualitza dins de l'event i a la llista principal
 public class EventAdapter  extends ListAdapter<Event, EventAdapter.EventHolder>  {
 
     private OnItemClickListener eventItemListener;
     private final static String TAG = "EventAdapter";
 
 
-    protected EventAdapter(@NonNull DiffUtil.ItemCallback<Event> diffCallback) {
+    EventAdapter(@NonNull DiffUtil.ItemCallback<Event> diffCallback) {
         super(diffCallback);
     }
 
@@ -36,7 +33,6 @@ public class EventAdapter  extends ListAdapter<Event, EventAdapter.EventHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull EventHolder holder, int position) {
-
         Event currentEvent = getItem(position);
         holder.textViewTitle.setText(currentEvent.getTittle());
         holder.textViewDescription.setText(currentEvent.getDescription());
@@ -44,13 +40,11 @@ public class EventAdapter  extends ListAdapter<Event, EventAdapter.EventHolder> 
     }
 
 
-
-    public Event getEventAt(int position) {
+    Event getEventAt(int position) {
         Log.d(TAG, "Position: "+ position);
         Log.d(TAG, "Event: "+ getItem(position).getTittle());
         return getItem(position);
     }
-
 
 
     class EventHolder extends RecyclerView.ViewHolder {
@@ -58,19 +52,16 @@ public class EventAdapter  extends ListAdapter<Event, EventAdapter.EventHolder> 
         private TextView textViewDescription;
         private RatingBar ratingAvaluation;
 
-        public EventHolder(View itemView) {
+        EventHolder(View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.tittle);
             textViewDescription = itemView.findViewById(R.id.description);
             ratingAvaluation = itemView.findViewById(R.id.avaluation);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (eventItemListener != null && position != RecyclerView.NO_POSITION) {
-                        eventItemListener.onItemClick(getItem(position));
-                    }
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (eventItemListener != null && position != RecyclerView.NO_POSITION) {
+                    eventItemListener.onItemClick(getItem(position));
                 }
             });
         }
@@ -81,7 +72,7 @@ public class EventAdapter  extends ListAdapter<Event, EventAdapter.EventHolder> 
         void onItemClick(Event event);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    void setOnItemClickListener(OnItemClickListener listener) {
         this.eventItemListener = listener;
     }
 

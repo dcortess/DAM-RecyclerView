@@ -2,13 +2,11 @@ package cat.udl.tidic.amd.dam_recyclerview.database;
 
 import android.content.Context;
 import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-
 import cat.udl.tidic.amd.dam_recyclerview.dao.EventDAOI;
 import cat.udl.tidic.amd.dam_recyclerview.models.Event;
 
@@ -19,6 +17,7 @@ public abstract class EventDatabase extends RoomDatabase {
 
     public abstract EventDAOI eventDAO();
 
+    // Creació base de dades
     public static synchronized EventDatabase getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
@@ -48,6 +47,7 @@ public abstract class EventDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
 
+            // Creació events predeterminats
             Event e1 = new Event (1, "20/01/2020", "22/01/2020",
                     "Event 0", "Wow this is event 0", (float) 3.0);
 
@@ -62,6 +62,7 @@ public abstract class EventDatabase extends RoomDatabase {
             Event e6 = new Event(2, "21/01/2020", "22/01/2020",
                     "Event 5", "Wow this is event 5",(float) 5.0);
 
+            // Inserció dels events a la base de dades
             eventDAO.insert(e1);
             eventDAO.insert(e2);
             eventDAO.insert(e3);

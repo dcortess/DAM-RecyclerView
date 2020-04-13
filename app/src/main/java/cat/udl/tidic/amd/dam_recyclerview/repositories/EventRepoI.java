@@ -7,22 +7,20 @@ import cat.udl.tidic.amd.dam_recyclerview.models.Event;
 
 public interface EventRepoI {
 
-   // Create a new event
+   // Crear un nou event
    void insert(Event event);
 
-   // Update an existing event
+   // Actualitzar un event exitent
    void update (Event event);
 
-   // Delete an event using the id
+   // Eliminar un event existent utlitzant l'id
    void delete(Event e);
 
-   // Get all the events create by a user
+   // Obtenir tots els events creats per un usuari
    LiveData<List<Event>> getEvents(int userId);
 
-   // Get all the events create by a all users
+   // Obtenir tots els events creats per tots els usuaris
    LiveData<List<Event>> getEvents();
 
-   // Remove all events
-   void deleteAll();
 
 }

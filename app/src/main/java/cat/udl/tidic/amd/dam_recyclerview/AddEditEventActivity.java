@@ -1,13 +1,9 @@
 package cat.udl.tidic.amd.dam_recyclerview;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -23,8 +19,6 @@ public class AddEditEventActivity extends AppCompatActivity {
             "cat.udl.tidic.amd.dam_recyclerview.EXTRA_TITLE";
     public static final String EXTRA_AVALUATION=
             "cat.udl.tidic.amd.dam_recyclerview.EXTRA_AVALUATION";
-    public static final String EXTRA_USERID =
-            "cat.udl.tidic.amd.dam_recyclerview.EXTRA_USERID";
     public static final String EXTRA_START =
             "cat.udl.tidic.amd.dam_recyclerview.EXTRA_START";
     public static final String EXTRA_END =
@@ -37,8 +31,8 @@ public class AddEditEventActivity extends AppCompatActivity {
     private EditText editTextStart;
     private EditText editTextDescription;
     private RatingBar ratingBarAvaluation;
-    private Button savaButton;
 
+    // Página principal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +43,7 @@ public class AddEditEventActivity extends AppCompatActivity {
         editTextStart = findViewById(R.id.edit_text_event_start);
         editTextEnd = findViewById(R.id.edit_text_event_end);
         ratingBarAvaluation = findViewById(R.id.ratingBar_event);
-        savaButton = findViewById(R.id.button_event_save);
+        Button savaButton = findViewById(R.id.button_event_save);
 
 
         Intent intent = getIntent();
@@ -66,17 +60,12 @@ public class AddEditEventActivity extends AppCompatActivity {
             setTitle("Add Event");
         }
 
-        savaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveEvent();
-            }
-        });
-
+        savaButton.setOnClickListener(v -> saveEvent());
 
     }
 
 
+    // Funció saveEvent, guarda els canvis fets als events i actualitza a la página principal.
     private void saveEvent() {
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
@@ -86,12 +75,14 @@ public class AddEditEventActivity extends AppCompatActivity {
 
         Log.d(TAG, "" +avaluation);
 
+        // Si el títol o la descipció son buides salta un error (tipus toast)
         if (title.trim().isEmpty() || description.trim().isEmpty()) {
             Toast.makeText(this,
                     "Please insert a title and description", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Iniciació intents
         Intent data = new Intent();
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
@@ -107,9 +98,6 @@ public class AddEditEventActivity extends AppCompatActivity {
         setResult(RESULT_OK, data);
         finish();
     }
-
-
-
 
 
 }
